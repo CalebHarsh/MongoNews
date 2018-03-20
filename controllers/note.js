@@ -2,7 +2,6 @@ const db = require("../models")
 
 const note = {
   addNote: function (req, res) {
-    console.log(req.body, req.params)
     let item = ""
     db.Note.create(req.body).then(common => {
       item = common

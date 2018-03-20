@@ -3,13 +3,14 @@ const express = require("express")
 const exphbs = require("express-handlebars")
 const bodyParser = require("body-parser")
 const mongoose = require("mongoose")
+const path = require("path")
 
 //set up express app
 const app = express()
 const PORT = process.env.PORT || 3030;
 
 // Static directory
-app.use(express.static("public"))
+app.use(express.static(path.join(__dirname + '/public')))
 
 // Sets up the Express app to handle data parsing
 // parse application/x-www-form-urlencoded

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
   <a class="navbar-brand" href="#">Mongo News</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
     aria-label="Toggle navigation">
@@ -20,8 +20,8 @@
 </nav>
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
-    <h1 class="display-4 text-center">Mongo News Scrapper</h1>
-    <p class="lead text-center">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+    <h1 class="display-4 text-center font-weight-bold">Mongo News Scrapper</h1>
+    <p class="lead text-center font-weight-bold">New York Times Edition</p>
   </div>
 </div>
 {{#if news}} {{#each news}}
@@ -31,7 +31,7 @@
     {{#if saved}}
     <a href="#" data-id="{{_id}}" class="btn btn-danger remove float-right">Remove Article</a>
     {{else}}
-    <a href="#" data-id="{{_id}}" class="btn btn-primary save float-right">Save Article</a>
+    <a href="#" data-id="{{_id}}" class="btn btn-dark save float-right">Save Article</a>
     {{/if}}
   </h5>
   <div class="card-body">
@@ -56,33 +56,6 @@
 </div>
 
 
-<script>
-  $("#scrape").on("click", e => {
-    console.log("scrape")
-    $.ajax({
-      url: "/scrape",
-      method: "GET"
-    }).done(data => {
-      console.log(data)
-      $('#scrapedModal').modal('show')
-      window.location.href = "/home"
-    })
-  })
-
-  $(".save").on("click", function (event) {
-    const id = $(this).data("id")
-    $.ajax({
-      url: `/save/${id}`,
-      method: "PUT"
-    }).done(data => window.location.href = "/home")
-  })
-
-  $(".remove").on("click", function (event) {
-    const id = $(this).data("id")
-    $.ajax({
-      url: `/remove/${id}`,
-      method: "PUT"
-    }).done(data => window.location.href = "/home")
-  })
+<script src="assets/js/home.js">
 
 </script>
