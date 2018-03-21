@@ -5,9 +5,14 @@ $("#scrape").on("click", e => {
     method: "GET"
   }).done(data => {
     console.log(data)
+    $("#number").text(data)
     $('#scrapedModal').modal('show')
-    window.location.href = "/home"
   })
+})
+
+$('#scrapedModal').on('hidden.bs.modal', function (e) {
+  // do something...
+  window.location.href = "/home"
 })
 
 $(".save").on("click", function (event) {

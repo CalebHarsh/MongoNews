@@ -4,15 +4,19 @@ const fetch = require("./fetch.js")
 const article = {
   getAllArtices: function (req, res) {
     fetch.scrapeNews().then(news => {
-      news.forEach((newsArt, i) => {
-        db.Article.findOne({ title: newsArt.title.trim() }).then(data => {
-          data ? console.log("already there") :
-            db.Article.create({
-              title: newsArt.title,
-              link: newsArt.link,
-              summary: newsArt.shortSum
-            }).then(result => i >= news.length - 1 ? res.send(`New Items added`) : console.log("New Item", result) )
-        })
+      Promise.all(news.map((newsArt, i) => {
+        return db.Article.findOne({ title: newsArt.title.trim() })
+        .then(data => data ? null :
+          db.Article.create({
+            title: newsArt.title,
+            link: newsArt.link,
+            summary: newsArt.shortSum
+          })
+        ).then(result =>  result ? "Item Added" : "There Already")
+      })).then(values => {
+        console.log(values)
+        const total = values.filter(art => art === "Item Added").length
+        res.send(`${total}`)
       })
     })
   },
@@ -52,7 +56,7 @@ const article = {
     })
   },
 
-  getComments: function(req, res) {
+  getComments: function (req, res) {
     db.Article.findById(req.params.id).populate("comments").then(data => {
       res.json(data.comments)
     })

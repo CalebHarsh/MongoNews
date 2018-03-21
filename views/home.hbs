@@ -40,7 +40,7 @@
 </div>
 {{/each}} {{else}}
 <div class="card mx-3 mb-3">
-  <h5 class="card-header text-center">You first must scrap the news</h5>
+  <h5 class="card-header text-center">You Must First Scrape the News</h5>
 </div>
 {{/if}}
 
@@ -48,8 +48,8 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-body d-flex align-items-center flex-column">
-        <span class="my-4 h3" id="info">Scraped Items</span>
-        <button type="button" class="btn btn-secondary clearfix" data-dismiss="modal">Close</button>
+        <span class="my-4 h3" id="info">Scraped <span id="number"></span> Items</span>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
